@@ -1,10 +1,29 @@
 extends layout
-
+script(src='//cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js')
+script.
+    $(document).ready(function() {
+      $('#resultTable').DataTable({'searching':true});
+    });
 block content
-  .container
-    form.form-signin(role='form', action='/searchSave', method='post')
-      h2.form-signin-heading Search By Url
-      label.sr-only(for='inputEmail')
-      input.form-control(type='text', name='username', id='inputEmail', placeholder='Username', required, autofocus)
-      input.form-control(type='password', name='password', id='inputPassword', placeholder='Password')
-      button.btn.btn-lg.btn-primary.btn-block(type='submit') LOGIN
+  div.collapse.navbar-collapse(id='search-buttons')
+    ul.nav.navbar-nav.navbar-left
+      li
+        h3 Searchs
+    ul.nav.navbar-nav.navbar-right
+      li
+        a(href='/search/add') Add Search
+      li
+        a(href='/search/searchFilter') Search by filter option
+  div
+  table#resultTable.table.table-hover.datatables
+    thead
+      tr
+        th Name
+        th Url
+    tbody
+      each data, i in list
+        tr 
+          td
+            #{data.name} 
+          td
+            #{data.url}
