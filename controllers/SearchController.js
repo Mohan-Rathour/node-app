@@ -8,7 +8,7 @@ var SearchController = {
     		console.log(data);
     		console.log(req.user);
     		return res.render('search', { list: data, user: req.user});
-    	}); 
+    	}).sort({ created_at : 'desc'}); 
     },
     save: function(req, res){
     	var searchObj = new Search({ name: req.body.name, userName: req.user, url: req.body['url[]']});
